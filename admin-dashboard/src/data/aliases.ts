@@ -15,6 +15,8 @@ export const gameAliases: AliasMap<
   | "previousRank"
   | "userCount"
   | "previousUserCount"
+  | "userRank"
+  | "previousUserRank"
   | "platform"
   | "company"
   | "period"
@@ -30,12 +32,25 @@ export const gameAliases: AliasMap<
     "현재 순위",
   ],
   previousRank: ["previous_rank", "previousRank", "이전순위", "이전 순위"],
-  userCount: ["user_count", "userCount", "이용자수", "이용자 수", "사용자수"],
+  userCount: ["user_count", "userCount", "이용자수", "이용자 수"],
   previousUserCount: [
     "previous_user_count",
     "previousUserCount",
     "이전이용자수",
     "이전 이용자수",
+  ],
+  userRank: [
+    "user_rank",
+    "userRank",
+    "이용자수순위",
+    "이용자수 순위",
+    "user_count_rank",
+  ],
+  previousUserRank: [
+    "previous_user_rank",
+    "previousUserRank",
+    "이전이용자수순위",
+    "이전 이용자수 순위",
   ],
   platform: ["platform", "플랫폼"],
   company: ["company", "회사", "업체", "회사명"],
@@ -50,6 +65,8 @@ export const adSpendAliases: AliasMap<
   | "previousCost"
   | "period"
   | "isOwnCompany"
+  | "creativeCount"
+  | "platformCount"
 > = {
   company: ["company", "회사", "업체", "advertiser", "회사명"],
   game: ["game_name", "gameName", "game", "게임명"],
@@ -64,6 +81,36 @@ export const adSpendAliases: AliasMap<
   ],
   period: ["period", "기간", "date"],
   isOwnCompany: ["is_own_company", "isOwnCompany", "자사여부", "구분"],
+  creativeCount: [
+    "creative_count",
+    "creativeCount",
+    "소재수",
+    "소재 수",
+    "신규소재수",
+    "신규 게재 소재 수",
+    "재사용소재수",
+    "재사용 소재 수",
+  ],
+  platformCount: [
+    "platform_count",
+    "platformCount",
+    "플랫폼수",
+    "플랫폼 수",
+    "노출플랫폼수",
+    "노출 플랫폼 수",
+    "평균노출플랫폼수",
+    "평균 노출 플랫폼 수",
+  ],
+};
+
+export const marketingEventAliases: AliasMap<
+  "game" | "date" | "type" | "description" | "viewCount"
+> = {
+  game: ["game_name", "gameName", "game", "게임명", "게임"],
+  date: ["date", "영상날짜", "게재시작일", "게재 시작일", "event_date"],
+  type: ["type", "구분", "종류"],
+  description: ["description", "요약", "테마/문구 요약", "내용"],
+  viewCount: ["view_count", "viewCount", "조회수"],
 };
 
 export const platformAliases: AliasMap<

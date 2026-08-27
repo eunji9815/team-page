@@ -73,3 +73,23 @@ export function buildCostByPeriod(records: AdSpend[]): PeriodCostPoint[] {
     .map(([period, totalCost]) => ({ period, totalCost }))
     .sort((a, b) => a.period.localeCompare(b.period));
 }
+
+export interface GameSeries {
+  name: string;
+  points: { x: string; y: number }[];
+}
+
+/** Groups per-game creative-count records by game across periods, for a trend chart. */
+export function buildCreativeCountSeries(records: AdSpend[]): GameSeries[] {
+  const byGame = new Map<string, { x: string; y: number }[]>();
+  records.forEach((record) => {
+    if (!record.game || !record.period || record.creativeCount == null) return;
+    const points = byGame.get(record.game) ?? [];
+    points.push({ x: record.period, y: record.creativeCount });
+    byGame.set(record.game, points);
+  });
+  return Array.from(byGame.entries()).map(([name, points]) => ({
+    name,
+    points: points.sort((a, b) => a.x.localeCompare(b.x)),
+  }));
+}

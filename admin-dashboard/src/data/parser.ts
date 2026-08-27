@@ -4,6 +4,7 @@ import {
   conclusionAliases,
   gameAliases,
   insightAliases,
+  marketingEventAliases,
   platformAliases,
   sourceAliases,
 } from "./aliases";
@@ -15,6 +16,7 @@ import type {
   DashboardDataset,
   Game,
   InsightEntry,
+  MarketingEvent,
   PlatformMetric,
   RawRecord,
   SourceEntry,
@@ -37,6 +39,8 @@ export function parseGames(rawRows: RawRecord[]): Game[] {
       previousRank: toNumber(mapped.previousRank),
       userCount: toNumber(mapped.userCount),
       previousUserCount: toNumber(mapped.previousUserCount),
+      userRank: toNumber(mapped.userRank),
+      previousUserRank: toNumber(mapped.previousUserRank),
       platform: toStringField(mapped.platform),
       company: toStringField(mapped.company),
       period: toStringField(mapped.period),
@@ -57,7 +61,23 @@ export function parseAdSpend(rawRows: RawRecord[]): AdSpend[] {
       previousCost: toNumber(mapped.previousCost),
       period: toStringField(mapped.period),
       isOwnCompany: toBoolean(mapped.isOwnCompany),
+      creativeCount: toNumber(mapped.creativeCount),
+      platformCount: toNumber(mapped.platformCount),
       extra: Object.keys(extra).length > 0 ? extra : undefined,
+    };
+  });
+}
+
+export function parseMarketingEvents(rawRows: RawRecord[]): MarketingEvent[] {
+  return rawRows.map((raw) => {
+    const { mapped } = mapRecord(raw, marketingEventAliases);
+    return {
+      id: nextId("event"),
+      game: toStringField(mapped.game),
+      date: toStringField(mapped.date),
+      type: toStringField(mapped.type),
+      description: toStringField(mapped.description),
+      viewCount: toNumber(mapped.viewCount),
     };
   });
 }
@@ -136,6 +156,7 @@ export interface RawDatasetInput {
   insights?: RawRecord[];
   conclusions?: RawRecord[];
   sources?: RawRecord[];
+  marketingEvents?: RawRecord[];
 }
 
 /**
@@ -155,5 +176,8 @@ export function buildDataset(input: RawDatasetInput): DashboardDataset {
     insights: input.insights ? parseInsights(input.insights) : empty.insights,
     conclusions: input.conclusions ? parseConclusions(input.conclusions) : empty.conclusions,
     sources: input.sources ? parseSources(input.sources) : empty.sources,
+    marketingEvents: input.marketingEvents
+      ? parseMarketingEvents(input.marketingEvents)
+      : empty.marketingEvents,
   };
 }

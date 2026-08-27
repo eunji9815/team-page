@@ -9,6 +9,9 @@ export interface UserRankedGameRow extends Game {
   userCountChange?: number;
   userCountGrowthRate?: number;
   userCountTrend: Trend;
+  /** rank change based on the userRank/previousUserRank axis (e.g. traffic-based ranking) */
+  userRankChange?: number;
+  userRankTrend: Trend;
 }
 
 /** Positive = moved up in rank (lower rank number is better). */
@@ -43,13 +46,29 @@ export function attachUserCountChange(games: Game[]): UserRankedGameRow[] {
         : undefined;
     const growthRate =
       change != null && game.previousUserCount ? (change / game.previousUserCount) * 100 : undefined;
+    const userRankChange = computeRankChange(game.userRank, game.previousUserRank);
     return {
       ...game,
       userCountChange: change,
       userCountGrowthRate: growthRate,
       userCountTrend: deriveTrendFromDelta(change),
+      userRankChange,
+      userRankTrend: deriveTrendFromDelta(userRankChange),
     };
   });
+}
+
+/**
+ * When `games` holds a full historical series (one row per game per
+ * period), restricts it to only the most recent period — the "current
+ * snapshot" a ranking table should show. If there's no period info at
+ * all, returns the input unchanged.
+ */
+export function filterLatestPeriod(games: Game[]): Game[] {
+  const periods = games.map((g) => g.period).filter((p): p is string => !!p);
+  if (periods.length === 0) return games;
+  const latest = periods.reduce((a, b) => (a > b ? a : b));
+  return games.filter((g) => g.period === latest);
 }
 
 export function sortByCurrentRank(games: RankedGameRow[]): RankedGameRow[] {
@@ -57,5 +76,10 @@ export function sortByCurrentRank(games: RankedGameRow[]): RankedGameRow[] {
 }
 
 export function sortByUserCount(games: UserRankedGameRow[]): UserRankedGameRow[] {
-  return [...games].sort((a, b) => (b.userCount ?? -Infinity) - (a.userCount ?? -Infinity));
+  return [...games].sort((a, b) => {
+    if (a.userCount != null || b.userCount != null) {
+      return (b.userCount ?? -Infinity) - (a.userCount ?? -Infinity);
+    }
+    return (a.userRank ?? Infinity) - (b.userRank ?? Infinity);
+  });
 }

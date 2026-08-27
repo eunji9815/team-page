@@ -17,6 +17,9 @@ export interface Game {
   previousRank?: number;
   userCount?: number;
   previousUserCount?: number;
+  /** rank position based on a user-count/traffic criterion (distinct ranking axis from currentRank) */
+  userRank?: number;
+  previousUserRank?: number;
   platform?: string;
   company?: string;
   period?: string;
@@ -33,7 +36,21 @@ export interface AdSpend {
   previousCost?: number;
   period?: string;
   isOwnCompany?: boolean;
+  /** number of ad creatives (proxy UA metric, used when actual spend amount isn't available) */
+  creativeCount?: number;
+  /** number of platforms a creative/campaign was exposed on (proxy UA metric) */
+  platformCount?: number;
   extra?: Record<string, unknown>;
+}
+
+/** A dated marketing activity (video release, ad creative launch, etc.) with an optional metric. */
+export interface MarketingEvent {
+  id: string;
+  game?: string;
+  date?: string;
+  type?: string;
+  description?: string;
+  viewCount?: number;
 }
 
 export interface PlatformMetric {
@@ -88,6 +105,7 @@ export interface DashboardDataset {
   insights: InsightEntry[];
   conclusions: ConclusionEntry[];
   sources: SourceEntry[];
+  marketingEvents: MarketingEvent[];
 }
 
 export function createEmptyDataset(): DashboardDataset {
@@ -99,5 +117,6 @@ export function createEmptyDataset(): DashboardDataset {
     insights: [],
     conclusions: [],
     sources: [],
+    marketingEvents: [],
   };
 }

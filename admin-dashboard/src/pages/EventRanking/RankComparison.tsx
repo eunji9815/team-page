@@ -3,12 +3,13 @@ import { DataTable } from "../../components/DataTable/DataTable";
 import { LineChart } from "../../components/charts/LineChart";
 import { useDashboardData } from "../../data/DataProvider";
 import { buildRankComparisonSeries, buildRankComparisonTable } from "../../logic/comparison";
+import { filterLatestPeriod } from "../../logic/ranking";
 import type { RankComparisonRow } from "../../logic/comparison";
 
 export function RankComparison() {
   const dataset = useDashboardData();
   const series = buildRankComparisonSeries(dataset.games);
-  const rows = buildRankComparisonTable(dataset.games);
+  const rows = buildRankComparisonTable(filterLatestPeriod(dataset.games));
 
   return (
     <>

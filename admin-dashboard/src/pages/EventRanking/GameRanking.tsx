@@ -1,6 +1,6 @@
 import { DataTable } from "../../components/DataTable/DataTable";
 import { useDashboardData } from "../../data/DataProvider";
-import { attachRankChange, sortByCurrentRank } from "../../logic/ranking";
+import { attachRankChange, filterLatestPeriod, sortByCurrentRank } from "../../logic/ranking";
 import type { RankedGameRow } from "../../logic/ranking";
 
 const trendLabel: Record<RankedGameRow["rankTrend"], string> = {
@@ -12,7 +12,7 @@ const trendLabel: Record<RankedGameRow["rankTrend"], string> = {
 
 export function GameRanking() {
   const dataset = useDashboardData();
-  const rows = sortByCurrentRank(attachRankChange(dataset.games));
+  const rows = sortByCurrentRank(attachRankChange(filterLatestPeriod(dataset.games)));
 
   return (
     <DataTable<RankedGameRow>
