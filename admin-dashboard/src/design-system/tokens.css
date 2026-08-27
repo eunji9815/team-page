@@ -1,0 +1,164 @@
+/*
+  Design Tokens
+  -------------
+  이 파일은 대시보드의 유일한 "디자인 소스"입니다.
+  색상, 타이포그래피, 간격, 테두리, 그림자, 레이아웃 크기 등
+  모든 시각적 값은 이 파일의 CSS 변수로만 정의합니다.
+
+  컴포넌트/페이지/로직 코드는 이 변수의 "이름"만 참조하므로,
+  향후 디자인을 전면 교체하려면 이 파일(과 필요 시 components.css)만
+  수정하면 되고, 데이터/라우팅/비즈니스 로직 코드는 전혀 건드릴 필요가 없습니다.
+*/
+
+:root {
+  /* ---------- Color: Brand & Semantic ---------- */
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-300: #a5b4fc;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+
+  --color-success-500: #16a34a;
+  --color-success-100: #dcfce7;
+  --color-danger-500: #dc2626;
+  --color-danger-100: #fee2e2;
+  --color-warning-500: #d97706;
+  --color-warning-100: #fef3c7;
+  --color-info-500: #0284c7;
+  --color-info-100: #e0f2fe;
+
+  /* ---------- Color: Neutral scale ---------- */
+  --color-neutral-0: #ffffff;
+  --color-neutral-25: #fbfbfd;
+  --color-neutral-50: #f7f8fa;
+  --color-neutral-100: #eef0f3;
+  --color-neutral-200: #e2e5ea;
+  --color-neutral-300: #cbd0d9;
+  --color-neutral-400: #9aa2b1;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5361;
+  --color-neutral-700: #333a45;
+  --color-neutral-800: #1f2430;
+  --color-neutral-900: #14171f;
+
+  /* ---------- Color: Semantic roles ---------- */
+  --color-bg-app: var(--color-neutral-50);
+  --color-bg-surface: var(--color-neutral-0);
+  --color-bg-surface-muted: var(--color-neutral-25);
+  --color-bg-sidebar: var(--color-neutral-900);
+  --color-bg-sidebar-active: rgba(255, 255, 255, 0.08);
+  --color-bg-sidebar-hover: rgba(255, 255, 255, 0.05);
+
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-500);
+  --color-text-muted: var(--color-neutral-400);
+  --color-text-inverse: #ffffff;
+  --color-text-sidebar: #cbd0d9;
+  --color-text-sidebar-muted: #8891a3;
+
+  --color-border-default: var(--color-neutral-200);
+  --color-border-strong: var(--color-neutral-300);
+
+  --color-accent: var(--color-brand-600);
+  --color-accent-soft: var(--color-brand-50);
+
+  --color-positive: var(--color-success-500);
+  --color-positive-soft: var(--color-success-100);
+  --color-negative: var(--color-danger-500);
+  --color-negative-soft: var(--color-danger-100);
+  --color-neutral-signal: var(--color-neutral-500);
+
+  /* Chart categorical palette (order matters) */
+  --chart-series-1: #4f46e5;
+  --chart-series-2: #0891b2;
+  --chart-series-3: #d97706;
+  --chart-series-4: #db2777;
+  --chart-series-5: #16a34a;
+  --chart-series-6: #7c3aed;
+  --chart-grid-line: var(--color-neutral-200);
+  --chart-axis-text: var(--color-neutral-400);
+
+  /* ---------- Typography ---------- */
+  --font-family-base: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  --font-family-mono: "SFMono-Regular", ui-monospace, Menlo, monospace;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-base: 0.9375rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.375rem;
+  --font-size-2xl: 1.75rem;
+  --font-size-3xl: 2.25rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+
+  /* ---------- Spacing scale ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+  --space-10: 64px;
+
+  /* ---------- Borders & Radius ---------- */
+  --border-width-thin: 1px;
+  --border-width-thick: 2px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 999px;
+
+  /* ---------- Shadows ---------- */
+  --shadow-sm: 0 1px 2px rgba(20, 23, 31, 0.06);
+  --shadow-md: 0 4px 12px rgba(20, 23, 31, 0.08);
+  --shadow-lg: 0 12px 32px rgba(20, 23, 31, 0.12);
+
+  /* ---------- Layout / Component sizing ---------- */
+  --layout-sidebar-width: 264px;
+  --layout-sidebar-width-collapsed: 76px;
+  --layout-header-height: 64px;
+  --layout-content-max-width: 1440px;
+  --layout-content-padding: var(--space-7);
+
+  --kpi-card-min-width: 200px;
+  --table-row-height: 44px;
+  --table-header-height: 40px;
+
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+
+  --z-sidebar: 100;
+  --z-header: 90;
+  --z-dropdown: 200;
+}
+
+/* Optional dark theme token override — swapping [data-theme="dark"] on <html>
+   changes the entire visual system without touching any component logic. */
+:root[data-theme="dark"] {
+  --color-bg-app: var(--color-neutral-900);
+  --color-bg-surface: #1a1e28;
+  --color-bg-surface-muted: #20242f;
+  --color-bg-sidebar: #0d0f14;
+
+  --color-text-primary: #f2f3f5;
+  --color-text-secondary: #a7adba;
+  --color-text-muted: #767e8f;
+
+  --color-border-default: #2a2f3b;
+  --color-border-strong: #383f4d;
+}

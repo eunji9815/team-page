@@ -1,0 +1,26 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.select {
+  appearance: none;
+  background-color: var(--color-bg-surface);
+  border: var(--border-width-thin) solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  min-width: 140px;
+}
+
+.select:disabled {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}

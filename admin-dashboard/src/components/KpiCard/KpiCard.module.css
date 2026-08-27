@@ -1,0 +1,58 @@
+.card {
+  background-color: var(--color-bg-surface);
+  border: var(--border-width-thin) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+  min-width: var(--kpi-card-min-width);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.unit {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.delta {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.deltaUp {
+  color: var(--color-positive);
+  background-color: var(--color-positive-soft);
+}
+
+.deltaDown {
+  color: var(--color-negative);
+  background-color: var(--color-negative-soft);
+}
+
+.deltaSame {
+  color: var(--color-neutral-signal);
+  background-color: var(--color-neutral-100);
+}
