@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AppLayout } from "./components/layout/AppLayout";
 import { DataProvider } from "./data/DataProvider";
+import { dataset } from "./data/source";
 import { BMAdvertising } from "./pages/BMStructure/BMAdvertising";
 import { BMCompetitiveness } from "./pages/BMStructure/BMCompetitiveness";
 import { BMPlatform } from "./pages/BMStructure/BMPlatform";
@@ -32,7 +33,7 @@ import { Sources } from "./pages/Sources/Sources";
  */
 export function App() {
   return (
-    <DataProvider>
+    <DataProvider dataset={dataset}>
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
