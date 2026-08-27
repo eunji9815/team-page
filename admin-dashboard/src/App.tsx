@@ -16,7 +16,13 @@ import { UserRanking } from "./pages/EventRanking/UserRanking";
 import { Conclusion } from "./pages/InsightConclusion/Conclusion";
 import { InsightConclusionLayout } from "./pages/InsightConclusion/InsightConclusionLayout";
 import { Insights } from "./pages/InsightConclusion/Insights";
-import { Overview } from "./pages/Overview/Overview";
+import { Advertising as OverviewAdvertising } from "./pages/Overview/Advertising";
+import { Events as OverviewEvents } from "./pages/Overview/Events";
+import { Insights as OverviewInsights } from "./pages/Overview/Insights";
+import { Kpi as OverviewKpi } from "./pages/Overview/Kpi";
+import { OverviewLayout } from "./pages/Overview/OverviewLayout";
+import { Ranking as OverviewRanking } from "./pages/Overview/Ranking";
+import { Summary as OverviewSummary } from "./pages/Overview/Summary";
 import { Sources } from "./pages/Sources/Sources";
 
 /**
@@ -31,7 +37,16 @@ export function App() {
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<Navigate to="/overview" replace />} />
-            <Route path="overview" element={<Overview />} />
+
+            <Route path="overview" element={<OverviewLayout />}>
+              <Route index element={<Navigate to="kpi" replace />} />
+              <Route path="kpi" element={<OverviewKpi />} />
+              <Route path="events" element={<OverviewEvents />} />
+              <Route path="ranking" element={<OverviewRanking />} />
+              <Route path="advertising" element={<OverviewAdvertising />} />
+              <Route path="insights" element={<OverviewInsights />} />
+              <Route path="summary" element={<OverviewSummary />} />
+            </Route>
 
             <Route path="event-ranking" element={<EventRankingLayout />}>
               <Route index element={<Navigate to="game" replace />} />

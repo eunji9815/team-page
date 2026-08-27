@@ -25,6 +25,14 @@ export const menuConfig: MenuItem[] = [
     id: "overview",
     label: "개요",
     path: "/overview",
+    children: [
+      { id: "kpi", label: "핵심 KPI", path: "/overview/kpi" },
+      { id: "events", label: "주요 이벤트", path: "/overview/events" },
+      { id: "ranking", label: "주요 순위", path: "/overview/ranking" },
+      { id: "advertising", label: "광고비 요약", path: "/overview/advertising" },
+      { id: "insights", label: "주요 인사이트", path: "/overview/insights" },
+      { id: "summary", label: "종합 요약", path: "/overview/summary" },
+    ],
   },
   {
     id: "event-ranking",
